@@ -1,0 +1,156 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+a {
+  text-decoration: none; 
+  color: inherit;
+}
+
+body {
+  background-color: rgb(61, 61, 61);
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #ff006a;
+  padding: 1rem 2rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+}
+.navbar img {
+  height: 50px;
+  border-radius: 10px;
+  position: absolute;
+}
+
+.footer {
+  background: #ff006a;
+  display: flex;
+  bottom: 0;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  width: 100%;
+  box-shadow: 0 -2px 8px rgba(0,0,0,0.25);
+}
+.footer p {
+  color: white;
+  width: 100%;
+  text-align: center;
+}
+
+.logo {
+  font-size: 1.6rem;
+  font-weight: bold;
+  color: #f1f5f9;
+  position: relative;
+  padding-left: 4rem;
+}
+
+.upload {
+  padding: 0.5rem 1rem;
+  background-color: #f1f5f9;
+  border: none;
+  border-radius: 4px;
+  color: #ff006a;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  margin-left: 1rem;
+}
+
+.upload:hover {
+  background-color: #c4dbfd;
+  padding: 0.5rem 2rem;
+}
+
+.upload:active {
+  background-color: #0080ff;
+  color: white;
+}
+
+.header {
+  color: white;
+
+  margin-top: 20px;
+  margin-bottom: 20px;
+  margin-left: 20px;
+}
+
+.para {
+  padding: 10px;
+  color: rgb(180, 180, 180);
+
+  margin-left: 20px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.entrance {
+  padding: 20px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 90%;
+  border-radius: 20px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  align-items: center;
+}
+
+/*for upload page*/
+.fileUpload {
+        position: fixed;
+        bottom: 0;
+        margin-bottom: 15px;
+        margin-left: 20px;
+      }
+      #drop-zone {
+        border: none;
+        background-color: rgb(49, 49, 49);
+        padding-left: 100px;
+        padding-right: 100px;
+        padding-top: 200px;
+        padding-bottom: 200px;
+
+        margin-right: 100px;
+        margin-left: 100px;
+        margin-top: 100px;
+
+        text-align: center;
+        color: white;
+        cursor: pointer;
+
+        transition: background-color 150ms cubic-bezier(0.4, 0, 0.2, 1);
+      }
+      #drop-zone:hover {
+        background-color: rgb(37, 37, 37);
+      }
+      #drop-zone img {
+        height: 100px;
+        transition: box-shadow 150ms cubic-bezier(0.4, 0, 0.2, 1);;
+      }
+
+      #submitButton {
+        padding: 10px 30px;
+        background-color: #f1f5f9;
+        border: none;
+        border-radius: 4px;
+        color: #ff006a;
+
+        font-weight: bold;
+        font-size: 20px;
+
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+
+        margin: 80px;
+        align-self: center;
+      }
+    
+    
