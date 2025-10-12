@@ -75,7 +75,7 @@
     cap.style.font = "13px/1.3 system-ui";
     cap.style.color = "#aaa";
     cap.style.marginTop = "6px";
-    cap.textContent = `Uploading “${file.name}”…`;
+    cap.textContent = `Image is not accessible (red)`;
 
     fig.appendChild(img);
     fig.appendChild(cap);
