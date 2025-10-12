@@ -48,7 +48,7 @@
   function enqueueFiles(files) {
     const filtered = (files || []).filter((f) => f.type?.startsWith("image/"));
     if (!filtered.length) {
-      log("⚠️ No images found in selection.", "orange");
+      log("No images found in selection.", "orange");
       return;
     }
     queue.push(...filtered);
@@ -69,7 +69,7 @@
     img.style.maxWidth = "240px";
     img.style.display = "block";
     img.style.borderRadius = "12px";
-    img.style.border = "4px solid #777"; 
+    img.style.border = "4px solid #777"; // neutral until classified
 
     const cap = document.createElement("figcaption");
     cap.style.font = "13px/1.3 system-ui";
@@ -94,6 +94,7 @@
       try { data = JSON.parse(raw); } catch { throw new Error(`Non-JSON: ${raw.slice(0, 200)}`); }
       if (data.error) throw new Error(data.error);
 
+      // Prefer numeric score if your app returns it; else fall back to color/label
       let color;
       if (typeof data.score === "number") {
         const s = data.score;
@@ -109,6 +110,7 @@
       }
 
       img.style.borderColor = color;
+      cap.textContent = `The image is not accessible (red)`;
 
       if (data.url) img.addEventListener("click", () => window.open(data.url, "_blank"));
     } catch (err) {
