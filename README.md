@@ -21,4 +21,4 @@ AccessiGo is a web app that highlights **accessible building entrances** on the 
 
 ## Tech Stack
 **Frontend:** HTML, CSS, Vanilla JavaScript  
-**Backend:** Python (Flask), TensorFlow/Keras or scikit-learn (via pickle)  
+**Backend:** Python (Flask), TensorFlow (via pickle)  
