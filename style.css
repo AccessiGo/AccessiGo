@@ -14,11 +14,101 @@ body {
   background-color: rgb(61, 61, 61);
 }
 
+.map{
+  padding: 20px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 90%;
+  border-radius: 20px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  align-items: center;
+}
+.map:hover{
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transform: scale(1.02);
+  transition: all 1s ease;
+  width: 94%;
+  height: 600px;
+}
+
+.link {
+  color: #ff006a;
+  font-weight: bold;
+}
+.link:hover {
+  color: rgb(255, 197, 197);
+}
+
+.pdf-section {
+  display: flex;
+  justify-content: center;
+  padding: 24px 16px;
+}
+
+/* Collapsible container */
+details.pdf-accordion {
+  width: 99%;
+}
+
+details.pdf-accordion > summary {
+  cursor: pointer;
+  user-select: none;
+  padding: 14px 16px;
+  border-radius: 14px;
+  font: 600 1rem/1.2 system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, sans-serif;
+  background: #0f172a;
+  color: #fff;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  list-style: none;
+  position: relative;
+}
+
+details.pdf-accordion > summary::after {
+  content: "▾";
+  position: absolute;
+  right: 16px;
+  transition: transform 0.2s ease;
+}
+details[open].pdf-accordion > summary::after {
+  transform: rotate(180deg);
+}
+
+.map-pdf {
+  --border: 4px;
+  --radius: 16px;
+  --g1: #06b6d4;
+  --g2: #8b5cf6;
+  --g3: #ec4899;
+
+  margin-top: 12px;
+  padding: var(--border);
+  border-radius: calc(var(--radius) + var(--border));
+  background: linear-gradient(135deg, var(--g1), var(--g2), var(--g3));
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+.map-pdf iframe {
+  display: block;
+  width: 100%;
+  height: 720px;
+  border: 0;
+  border-radius: var(--radius);
+}
+
+details.pdf-accordion .pdf-body {
+  display: none;
+}
+details[open].pdf-accordion .pdf-body {
+  display: block;
+}
+
 .navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: #ff006a;
+  background: linear-gradient(to bottom right, #7f3152, rgb(61, 61, 61));
   padding: 1rem 2rem;
   box-shadow: 0 2px 8px rgba(0,0,0,0.25);
 }
@@ -29,7 +119,7 @@ body {
 }
 
 .footer {
-  background: #ff006a;
+  background: linear-gradient(to bottom right, #7f3152, rgb(61, 61, 61));
   display: flex;
   bottom: 0;
   justify-content: space-between;
@@ -52,7 +142,7 @@ body {
   padding-left: 4rem;
 }
 
-.upload {
+.nav-buttons {
   padding: 0.5rem 1rem;
   background-color: #f1f5f9;
   border: none;
@@ -64,43 +154,62 @@ body {
   margin-left: 1rem;
 }
 
-.upload:hover {
+.nav-buttons:hover {
   background-color: #c4dbfd;
   padding: 0.5rem 2rem;
 }
 
-.upload:active {
+.nav-buttons:active {
   background-color: #0080ff;
   color: white;
 }
 
 .header {
+  padding-top: 20px;
   color: white;
-
   margin-top: 20px;
-  margin-bottom: 20px;
+  margin-bottom: none;
   margin-left: 20px;
+  padding-bottom: none;
+  text-align: center;
 }
 
 .para {
-  padding: 10px;
+  font: aria-label;
+  font-weight: 300;
+  padding: 5px;
+  padding-top: none;
+  padding-bottom: none;
   color: rgb(180, 180, 180);
+  font-size: 16px;
 
   margin-left: 20px;
   margin-top: 10px;
   margin-bottom: 10px;
 }
+.description {
+  padding-top: 0%;
+  padding-left: 30px;
+  color: rgb(180, 180, 180);
+
+  margin-left: 40px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
 
 .entrance {
-  padding: 20px;
   display: block;
   margin-left: auto;
   margin-right: auto;
-  width: 90%;
+  width: 96%;
   border-radius: 20px;
+  border: 5px solid black;
   margin-top: 20px;
   margin-bottom: 20px;
   align-items: center;
+}
+.entrance:hover{
+  border: 5px solid #ff006a;
 }
 
 /*for upload page*/
@@ -120,7 +229,7 @@ body {
 
         margin-right: 100px;
         margin-left: 100px;
-        margin-top: 100px;
+        margin-top: 30px;
 
         text-align: center;
         color: white;
@@ -152,5 +261,12 @@ body {
         margin: 80px;
         align-self: center;
       }
-    
-    
+
+      #submitButton:hover {
+        background-color: #c4dbfd;
+        padding: 10px 50px;
+      }
+      #submitButton:active {
+        background-color: #0080ff;
+        color: white;
+      }
