@@ -1,14 +1,13 @@
 from flask import Flask, render_template, request, jsonify
 import os
 from werkzeug.utils import secure_filename
-from PIL import Image
+from PIL import Image, ImageStat
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = os.environ.get('UPLOAD_FOLDER', '/tmp')
-
-app.config['UPLOAD_FOLDER'] = 'uploads'
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # 16MB
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif', 'bmp'}
+
 os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
 
 def allowed_file(filename):
@@ -20,7 +19,7 @@ def index():
 
 @app.route('/upload-page')
 def upload_page():
-    return render_template('upload.html')
+    return render_template('upload_2.html')
 
 @app.route('/upload', methods=['POST'])
 def upload_file():
@@ -38,15 +37,11 @@ def upload_file():
 
     try:
         with Image.open(filepath) as img:
-            arr = np.asarray(img)
-            score = float((arr.mean() % 1))
-        label = 'Accessible' if score >= 0.6 else ('Somewhat Accessible' if score >= 0.4 else 'Inaccessible')
-        result = {
-            'label': label,
-            'score': round(score, 4)
-        }
+            means = ImageStat.Stat(img.convert('RGB')).mean  # [R,G,B] means
+            score = (sum(means) / 3.0) % 1.0  # 0..1-ish
+
         os.remove(filepath)
-        return jsonify(result)
+        return jsonify({'score': round(float(score), 4)})
     except Exception as e:
         if os.path.exists(filepath):
             os.remove(filepath)
