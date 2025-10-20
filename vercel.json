@@ -3,8 +3,7 @@
     { "src": "app.py", "use": "@vercel/python" }
   ],
   "routes": [
-    { "src": "/static/(.*)", "dest": "/static/$1" },
-    { "src": "/favicon\\.ico", "dest": "/static/img/AccessiGo%20Logo.png" },
+    { "src": "/favicon\\.ico", "dest": "static/img/AccessiGo%20Logo.png" },
     { "src": "/(.*)", "dest": "app.py" }
   ]
 }
