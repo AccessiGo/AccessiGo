@@ -1,0 +1,5 @@
+Flask==3.0.0
+Werkzeug==3.0.0
+Pillow==10.4.0
+numpy==1.26.4
+vercel-wsgi==0.8.1
