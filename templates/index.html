@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>AccessiGo</title>
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='img/AccessiGo Logo.png') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  </head>
+  <body>
+    <nav class="navbar glass" id="navbar">
+      <div class="navbar__left">
+        <a class="logo" href="{{ url_for('index') }}" aria-label="AccessiGo Home">
+          <img class="logo__img-square"
+               src="{{ url_for('static', filename='img/AccessiGo Logo.png') }}"
+               alt="AccessiGo logo" />
+          <span class="logo__text">AccessiGo</span>
+        </a>
+      </div>
+      <div class="navbar__right">
+        <a class="btn" href="https://devfest-innovate-with-ai.devpost.com/" target="_blank" rel="noopener noreferrer">DevPost</a>
+        <a class="btn" href="https://github.com/Shmy1234/AccessiGo" target="_blank" rel="noopener noreferrer">GitHub Repo</a>
+        <a class="btn" href="https://www.uwindsor.ca/concussion/sites/uwindsor.ca.concussion/files/uw_campus_map.pdf" target="_blank" rel="noopener noreferrer">Map</a>
+        <a class="btn btn--primary" href="{{ url_for('upload_page') }}">Upload</a>
+      </div>
+    </nav>
+
+    <main class="container one-col">
+      <header class="hero card">
+        <h1 class="hero__title">Welcome to AccessiGo!</h1>
+        <p class="hero__subtitle">
+          A web app that highlights accessible building entrances around the University of Windsor.
+        </p>
+      </header>
+
+      <section class="pdf-section card">
+        <details class="accordion" name="map-pdf">
+          <summary class="accordion__summary">UWindsor Campus Map (PDF) — click to expand</summary>
+          <div class="accordion__body">
+            <div class="pdf-embed glass-inset">
+              <iframe
+                title="UWindsor Campus Map PDF"
+                src="{{ url_for('static', filename='img/uw_campus_map.pdf') }}"
+                loading="lazy">
+              </iframe>
+            </div>
+          </div>
+        </details>
+      </section>
+
+      <section class="content card">
+        <p class="para">
+          AccessiGo focuses on outdoor accessibility, showing which building entrances are wheelchair-accessible
+          and clearly marking them on an interactive map. Future versions will expand to include other features
+          such as indoor navigation, elevators, and ramps.
+        </p>
+      </section>
+
+      <section class="card">
+        <div class="media-wrap glass-inset">
+          <img class="media-wrap__img" src="{{ url_for('static', filename='img/entrance.jpg') }}" alt="Accessible entrance example">
+        </div>
+        <p class="image-block__caption">Example of a clearly marked accessible entrance.</p>
+      </section>
+
+      <section class="map-section card">
+        <div class="media-wrap glass-inset">
+          <iframe
+            class="map-frame"
+            title="University of Windsor Map"
+            src="https://www.google.com/maps?q=University+of+Windsor,401+Sunset+Avenue+Windsor+ON&output=embed"
+            allowfullscreen
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade">
+          </iframe>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer glass">
+      <p>
+        Built by
+        <a href="https://www.linkedin.com/in/sahilregonda/" target="_blank" rel="noopener noreferrer">Sahil</a> ·
+        <a href="https://www.linkedin.com/in/jack-saunders-57a2a7387/" target="_blank" rel="noopener noreferrer">Jack</a> ·
+        <a href="https://www.linkedin.com/in/vaamanan-mugunthan-93202a32b/" target="_blank" rel="noopener noreferrer">Vaamanan</a>
+      </p>
+    </footer>
+
+    <script>
+      // Shrink navbar when page is scrolled; revert on hover
+      const navbar = document.getElementById('navbar');
+      function updateNavbar() {
+        if (window.scrollY > 10) navbar.classList.add('navbar--shrink');
+        else navbar.classList.remove('navbar--shrink');
+      }
+      window.addEventListener('scroll', updateNavbar, { passive: true });
+      document.addEventListener('DOMContentLoaded', updateNavbar);
+    </script>
+  </body>
+</html>
