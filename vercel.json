@@ -1,14 +1,10 @@
 {
-  "functions": {
-    "api/index.py": {
-      "runtime": "vercel-python@0.5.7",
-      "memory": 1024,
-      "maxDuration": 10
-    }
-  },
+  "builds": [
+    { "src": "api/index.py", "use": "@vercel/python" }
+  ],
   "routes": [
     { "src": "/static/(.*)", "dest": "/static/$1" },
     { "src": "/favicon\\.ico", "dest": "/static/img/AccessiGo%20Logo.png" },
-    { "src": "/(.*)", "dest": "/api/index.py" }
+    { "src": "/(.*)", "dest": "api/index.py" }
   ]
 }
