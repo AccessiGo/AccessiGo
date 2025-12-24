@@ -1,0 +1,15 @@
+# Node and build output
+node_modules
+frontend/node_modules
+dist
+frontend/dist
+
+# Environment files
+.env
+.env.*
+frontend/.env
+frontend/.env.*
+
+# Python
+__pycache__/
+*.pyc

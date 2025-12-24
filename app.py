@@ -1,7 +1,11 @@
-from flask import Flask, render_template, request, jsonify
+from pathlib import Path
+from flask import Flask, render_template, request, jsonify, send_from_directory
 import os
 from werkzeug.utils import secure_filename
 from PIL import Image, ImageStat
+
+BASE_DIR = Path(__file__).resolve().parent
+REACT_BUILD_DIR = BASE_DIR / "frontend" / "dist"
 
 app = Flask(__name__)
 app.config["UPLOAD_FOLDER"] = os.environ.get("UPLOAD_FOLDER", "/tmp")
@@ -38,3 +42,17 @@ def upload_file():
     except Exception as e:
         if os.path.exists(path): os.remove(path)
         return jsonify({"error": str(e)}), 500
+
+def has_react_build():
+    return REACT_BUILD_DIR.exists() and (REACT_BUILD_DIR / "index.html").exists()
+
+@app.route("/", defaults={"path": ""})
+@app.route("/<path:path>")
+def serve_frontend(path: str):
+    if has_react_build():
+        target = REACT_BUILD_DIR / path
+        if path and target.exists():
+            return send_from_directory(REACT_BUILD_DIR, path)
+        return send_from_directory(REACT_BUILD_DIR, "index.html")
+    # Fallback to Jinja template if React build is unavailable
+    return render_template("index.html")
