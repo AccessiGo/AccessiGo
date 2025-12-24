@@ -47,7 +47,7 @@ a {
 
 .container {
   width: min(1100px, 92vw);
-  margin: 32px auto 32px;
+  margin: 32px auto 64px;
   display: grid;
   gap: 24px;
 }
@@ -63,6 +63,12 @@ a {
   padding: 24px;
   box-shadow: 0 10px 24px rgba(0, 0, 0, 0.25);
   backdrop-filter: blur(8px);
+}
+
+.card__title {
+  margin: 0 0 12px;
+  font-size: 1.15rem;
+  letter-spacing: 0.1px;
 }
 
 .glass {
@@ -245,6 +251,10 @@ a {
   height: 480px;
   border: none;
   display: block;
+}
+
+.map-section {
+  padding-bottom: 32px;
 }
 
 .info-block {
