@@ -18,8 +18,6 @@
         </a>
       </div>
       <div class="navbar__right">
-        <a class="btn" href="https://devfest-innovate-with-ai.devpost.com/" target="_blank" rel="noopener noreferrer">DevPost</a>
-        <a class="btn" href="https://github.com/Shmy1234/AccessiGo" target="_blank" rel="noopener noreferrer">GitHub Repo</a>
         <a class="btn" href="https://www.uwindsor.ca/concussion/sites/uwindsor.ca.concussion/files/uw_campus_map.pdf" target="_blank" rel="noopener noreferrer">Map</a>
         <a class="btn btn--primary" href="{{ url_for('upload_page') }}">Upload</a>
       </div>
@@ -31,10 +29,14 @@
         <p class="hero__subtitle">
           A web app that highlights accessible building entrances around the University of Windsor.
         </p>
+        <div class="hero__actions">
+          <a class="btn btn--primary" href="{{ url_for('upload_page') }}">Upload an Entrance Photo</a>
+          <a class="btn btn--ghost" href="#map">Jump to Campus Map</a>
+        </div>
       </header>
 
       <section class="pdf-section card">
-        <details class="accordion" name="map-pdf">
+        <details class="accordion" name="map-pdf" open>
           <summary class="accordion__summary">UWindsor Campus Map (PDF) — click to expand</summary>
           <div class="accordion__body">
             <div class="pdf-embed glass-inset">
@@ -50,20 +52,23 @@
 
       <section class="content card">
         <p class="para">
-          AccessiGo focuses on outdoor accessibility, showing which building entrances are wheelchair-accessible
-          and clearly marking them on an interactive map. Future versions will expand to include other features
-          such as indoor navigation, elevators, and ramps.
+          AccessiGo focuses on outdoor accessibility, showing which building entrances are wheelchair-accessible and
+          clearly marking them on an interactive map so students, visitors, and staff can plan routes confidently
+          before they arrive on campus. The current version highlights the University of Windsor, but the approach is
+          designed to scale across campuses with community-sourced photos and map overlays. Future iterations will
+          layer in indoor navigation, elevator and ramp details, live status updates, and richer guidance to make every
+          stage of the journey easier to navigate.
         </p>
       </section>
 
-      <section class="card">
+      <section class="card image-card">
         <div class="media-wrap glass-inset">
           <img class="media-wrap__img" src="{{ url_for('static', filename='img/entrance.jpg') }}" alt="Accessible entrance example">
         </div>
         <p class="image-block__caption">Example of a clearly marked accessible entrance.</p>
       </section>
 
-      <section class="map-section card">
+      <section class="map-section card" id="map">
         <div class="media-wrap glass-inset">
           <iframe
             class="map-frame"
@@ -76,15 +81,6 @@
         </div>
       </section>
     </main>
-
-    <footer class="footer glass">
-      <p>
-        Built by
-        <a href="https://www.linkedin.com/in/sahilregonda/" target="_blank" rel="noopener noreferrer">Sahil</a> ·
-        <a href="https://www.linkedin.com/in/jack-saunders-57a2a7387/" target="_blank" rel="noopener noreferrer">Jack</a> ·
-        <a href="https://www.linkedin.com/in/vaamanan-mugunthan-93202a32b/" target="_blank" rel="noopener noreferrer">Vaamanan</a>
-      </p>
-    </footer>
 
     <script>
       // Shrink navbar when page is scrolled; revert on hover

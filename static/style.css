@@ -23,6 +23,7 @@ body {
   background: linear-gradient(135deg, var(--bg1) 0%, var(--bg2) 100%) fixed;
   color: #f5f7ff;
   -webkit-tap-highlight-color: transparent;
+  line-height: 1.6;
 }
 
 h1, h2, h3 {
@@ -46,9 +47,9 @@ a {
 
 .container {
   width: min(1100px, 92vw);
-  margin: 24px auto;
+  margin: 32px auto 56px;
   display: grid;
-  gap: 20px;
+  gap: 24px;
 }
 
 .container.one-col {
@@ -59,7 +60,7 @@ a {
   background: var(--card);
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 16px;
-  padding: 20px;
+  padding: 24px;
   box-shadow: 0 10px 24px rgba(0, 0, 0, 0.25);
   backdrop-filter: blur(8px);
 }
@@ -184,6 +185,26 @@ a {
   color: #d7ddff;
 }
 
+.hero__actions {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.btn--ghost {
+  background: transparent;
+  border-color: rgba(255, 255, 255, 0.3);
+  box-shadow: none;
+}
+
+.btn--ghost:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.45);
+}
+
 .accordion {
   border: none;
 }
@@ -224,6 +245,19 @@ a {
   height: 480px;
   border: none;
   display: block;
+}
+
+.image-card {
+  display: grid;
+  gap: 14px;
+  padding: 20px;
+}
+
+.image-block__caption {
+  margin: 10px 6px 0;
+  text-align: center;
+  color: #d7ddff;
+  font-size: 0.98rem;
 }
 
 .upload-form {
