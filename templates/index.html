@@ -50,15 +50,21 @@
         </details>
       </section>
 
-      <section class="content card">
-        <p class="para">
-          AccessiGo focuses on outdoor accessibility, showing which building entrances are wheelchair-accessible and
-          clearly marking them on an interactive map so students, visitors, and staff can plan routes confidently
-          before they arrive on campus. The current version highlights the University of Windsor, but the approach is
-          designed to scale across campuses with community-sourced photos and map overlays. Future iterations will
-          layer in indoor navigation, elevator and ramp details, live status updates, and richer guidance to make every
-          stage of the journey easier to navigate.
-        </p>
+      <section class="card info-block">
+        <div class="info-block__text">
+          <ul class="bullet-list">
+            <li>AccessiGo focuses on outdoor accessibility, showing which building entrances are wheelchair-accessible and clearly marking them on an interactive map so students, visitors, and staff can plan routes confidently before they arrive on campus.</li>
+            <li>The current version highlights the University of Windsor, but the approach is designed to scale across campuses with community-sourced photos and map overlays.</li>
+            <li>Future iterations will layer in indoor navigation, elevator and ramp details, live status updates, and richer guidance to make every stage of the journey easier to navigate.</li>
+          </ul>
+        </div>
+        <div class="info-block__badge glass-inset">
+          <img
+            class="info-block__logo"
+            src="{{ url_for('static', filename='img/logo.png') }}"
+            alt="Accessibility logo" />
+          <p class="info-block__label">Accessibility-first</p>
+        </div>
       </section>
 
       <section class="card image-card">
