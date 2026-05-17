@@ -10,7 +10,7 @@ export default defineConfig({
   server: {
     port: 5173,
     proxy: {
-      '/upload': backendTarget,
+      '/api/upload': backendTarget,
       '/static': backendTarget
     }
   },

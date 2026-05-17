@@ -8,92 +8,200 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
   </head>
   <body>
-    <nav class="navbar glass" id="navbar">
-      <div class="navbar__left">
-        <a class="logo" href="{{ url_for('index') }}" aria-label="AccessiGo Home">
-          <img class="logo__img-square"
-               src="{{ url_for('static', filename='img/logo.png') }}"
-               alt="AccessiGo logo" />
+    <div class="page" id="top">
+      <nav class="navbar" id="navbar">
+        <a class="logo" href="{{ url_for('index') }}" aria-label="AccessiGo home">
+          <img class="logo__img-square" src="{{ url_for('static', filename='img/logo.png') }}" alt="AccessiGo logo" />
           <span class="logo__text">AccessiGo</span>
         </a>
-      </div>
-      <div class="navbar__right">
-        <a class="btn" href="https://www.uwindsor.ca/concussion/sites/uwindsor.ca.concussion/files/uw_campus_map.pdf" target="_blank" rel="noopener noreferrer">Map</a>
-        <a class="btn btn--primary" href="{{ url_for('upload_page') }}">Upload</a>
-      </div>
-    </nav>
-
-    <main class="container one-col">
-      <header class="hero card">
-        <h1 class="hero__title">Welcome to AccessiGo!</h1>
-        <p class="hero__subtitle">
-          A web app that highlights accessible building entrances around the University of Windsor.
-        </p>
-        <div class="hero__actions">
-          <a class="btn btn--primary" href="{{ url_for('upload_page') }}">Upload an Entrance Photo</a>
-          <a class="btn btn--ghost" href="#map">Jump to Campus Map</a>
+        <div class="navbar__links" aria-label="Primary navigation">
+          <a href="#why">Why AccessiGo</a>
+          <a href="#roadmap">Roadmap</a>
         </div>
-      </header>
+        <a class="btn btn--primary navbar__cta" href="{{ url_for('upload_page') }}">Upload Photo</a>
+      </nav>
 
-      <section class="pdf-section card">
-        <h2 class="card__title">Campus Map PDF</h2>
-        <details class="accordion" name="map-pdf" open>
-          <summary class="accordion__summary">UWindsor Campus Map (PDF) — click to expand</summary>
-          <div class="accordion__body">
-            <div class="pdf-embed glass-inset">
-              <iframe
-                title="UWindsor Campus Map PDF"
-                src="{{ url_for('static', filename='img/uw_campus_map.pdf') }}"
-                loading="lazy">
-              </iframe>
+      <main>
+        <section class="hero">
+          <div class="hero__copy">
+            <h1>
+              <span class="hero-title-line hero-title-line--desktop">Find accessible entrances</span>
+              <span class="hero-title-line hero-title-line--mobile">Find accessible</span>
+              <span class="hero-title-line hero-title-line--mobile">entrances</span>
+              <span>before you go.</span>
+            </h1>
+            <p>
+              AccessiGo helps students, staff, and visitors find wheelchair-accessible building
+              entrances at the University of Windsor, verify entrance photos, and plan outdoor routes
+              with fewer surprises.
+            </p>
+            <div class="hero__actions">
+              <a class="btn btn--primary" href="{{ url_for('upload_page') }}#map">Explore Campus Map</a>
+              <a class="btn btn--secondary" href="{{ url_for('upload_page') }}#upload">Check a Photo</a>
             </div>
           </div>
-        </details>
-      </section>
 
-      <section class="card info-block">
-        <h2 class="card__title info-block__title">Why AccessiGo</h2>
-        <div class="info-block__text">
-          <ul class="bullet-list">
-            <li>AccessiGo focuses on outdoor accessibility, showing which building entrances are wheelchair-accessible and clearly marking them on an interactive map so students, visitors, and staff can plan routes confidently before they arrive on campus.</li>
-            <li>The current version highlights the University of Windsor, but the approach is designed to scale across campuses with community-sourced photos and map overlays.</li>
-            <li>Future iterations will layer in indoor navigation, elevator and ramp details, live status updates, and richer guidance to make every stage of the journey easier to navigate.</li>
-          </ul>
-        </div>
-        <div class="info-block__badge glass-inset">
-          <img
-            class="info-block__logo"
-            src="{{ url_for('static', filename='img/logo.png') }}"
-            alt="Accessibility logo" />
-          <p class="info-block__label">Accessibility-first</p>
-        </div>
-      </section>
+          <div class="proof-row" aria-label="AccessiGo highlights">
+            <div class="proof-item"><span aria-hidden="true"></span><strong>University of Windsor campus pilot</strong></div>
+            <div class="proof-item"><span aria-hidden="true"></span><strong>Entrance photo accessibility scoring</strong></div>
+            <div class="proof-item"><span aria-hidden="true"></span><strong>Outdoor routes now, indoor guidance next</strong></div>
+          </div>
 
-      <section class="card image-card">
-        <h2 class="card__title">Accessible Entrance Example</h2>
-        <div class="media-wrap glass-inset">
-          <img class="media-wrap__img" src="{{ url_for('static', filename='img/entrance.jpg') }}" alt="Accessible entrance example">
-        </div>
-        <p class="image-block__caption">Example of a clearly marked accessible entrance.</p>
-      </section>
+          <section class="product-preview" aria-label="AccessiGo campus accessibility preview">
+            <aside class="preview-sidebar">
+              <div class="preview-brand">
+                <img src="{{ url_for('static', filename='img/logo.png') }}" alt="" />
+                <strong>AccessiGo</strong>
+              </div>
+              <div class="preview-nav-item preview-nav-item--active">Entrances</div>
+              <div class="preview-nav-item">Routes</div>
+              <div class="preview-nav-item">Photos</div>
+              <div class="preview-nav-item">Reports</div>
+            </aside>
 
-      <section class="map-section card" id="map">
-        <h2 class="card__title">Interactive Campus Map</h2>
-        <div class="media-wrap glass-inset">
-          <iframe
-            class="map-frame"
-            title="University of Windsor Map"
-            src="https://www.google.com/maps?q=University+of+Windsor,401+Sunset+Avenue+Windsor+ON&output=embed"
-            allowfullscreen
-            loading="lazy"
-            referrerpolicy="no-referrer-when-downgrade">
-          </iframe>
-        </div>
-      </section>
-    </main>
+            <div class="preview-main">
+              <div class="preview-topbar">
+                <div>
+                  <strong>Accessible Entrances</strong>
+                  <span>University of Windsor campus</span>
+                </div>
+                <button class="preview-faq" type="button">FAQ</button>
+              </div>
+
+              <div class="preview-search">
+                <span aria-hidden="true" class="search-icon"></span>
+                <span>Search buildings, entrances, or routes</span>
+                <button type="button">Save view</button>
+              </div>
+
+              <div class="preview-filters" aria-label="Sample map filters">
+                <span>Outdoor</span>
+                <span>Wheelchair access</span>
+                <span>Photo verified</span>
+                <span>Open now</span>
+              </div>
+
+              <div class="preview-content">
+                <div class="entrance-list">
+                  <article class="entrance-card">
+                    <div class="entrance-card__mark" aria-hidden="true">A</div>
+                    <div>
+                      <h3>CAW Student Centre</h3>
+                      <p>Level approach, automatic doors</p>
+                      <span>Updated from campus photo</span>
+                    </div>
+                    <strong class="status-good">Accessible</strong>
+                  </article>
+                  <article class="entrance-card">
+                    <div class="entrance-card__mark" aria-hidden="true">A</div>
+                    <div>
+                      <h3>Leddy Library</h3>
+                      <p>Ramp nearby, check west doors</p>
+                      <span>Needs clearer entrance photo</span>
+                    </div>
+                    <strong class="status-review">Review</strong>
+                  </article>
+                  <article class="entrance-card">
+                    <div class="entrance-card__mark" aria-hidden="true">A</div>
+                    <div>
+                      <h3>Odette School of Business</h3>
+                      <p>Marked exterior accessible route</p>
+                      <span>Outdoor route ready</span>
+                    </div>
+                    <strong class="status-good">Accessible</strong>
+                  </article>
+                </div>
+
+                <div class="mini-map" aria-label="Stylized campus map with accessible entrance pins">
+                  <div class="map-road map-road--one"></div>
+                  <div class="map-road map-road--two"></div>
+                  <div class="map-road map-road--three"></div>
+                  <span class="map-pin map-pin--one"></span>
+                  <span class="map-pin map-pin--two"></span>
+                  <span class="map-pin map-pin--three"></span>
+                  <div class="map-card">
+                    <strong>CAW entrance</strong>
+                    <span>Barrier-free route found</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </section>
+
+        <section class="split-section" id="why">
+          <div class="section-copy">
+            <span class="section-label">Why AccessiGo</span>
+            <h2>Plan the entrance, not just the destination.</h2>
+            <p>
+              Traditional campus maps can get someone to a building, but they rarely explain which
+              door is usable, where the ramp starts, or whether an entrance photo is current. AccessiGo
+              turns those details into a clearer accessibility layer.
+            </p>
+            <ul class="feature-list">
+              <li>
+                <strong>Accessible entrances shown clearly</strong>
+                <span>AccessiGo focuses on the part of a trip that campus maps often skip: which entrance is actually wheelchair-accessible.</span>
+              </li>
+              <li>
+                <strong>Built around real campus movement</strong>
+                <span>The first version centers on outdoor accessibility at the University of Windsor so routes can be planned between buildings, parking, sidewalks, ramps, and doors.</span>
+              </li>
+              <li>
+                <strong>Photos help keep access data current</strong>
+                <span>Community-sourced entrance photos can be uploaded and reviewed with a quick accessibility signal as buildings, pathways, and temporary barriers change.</span>
+              </li>
+              <li>
+                <strong>Designed to scale past one campus</strong>
+                <span>The same workflow can expand to other schools with local map overlays, entrance details, verified photos, and accessibility metadata.</span>
+              </li>
+            </ul>
+          </div>
+
+          <aside class="campus-panel" aria-label="Campus accessibility summary">
+            <img src="{{ url_for('static', filename='img/entrance.jpg') }}" alt="University of Windsor campus" />
+            <div class="campus-panel__content">
+              <strong>Outdoor accessibility first</strong>
+              <p>
+                Start with entrances, sidewalks, ramps, and exterior routes. Then expand indoors once
+                the most visible access barriers are documented.
+              </p>
+              <div class="metric-grid">
+                <div><span>01</span><strong>Map the entrance</strong></div>
+                <div><span>02</span><strong>Verify with photos</strong></div>
+                <div><span>03</span><strong>Guide the route</strong></div>
+              </div>
+            </div>
+          </aside>
+        </section>
+
+        <section class="roadmap-section" id="roadmap">
+          <div class="section-copy">
+            <span class="section-label">Roadmap</span>
+            <h2>Designed for a more complete access network.</h2>
+          </div>
+          <div class="roadmap-grid">
+            <article class="roadmap-card">
+              <span>01</span>
+              <h3>Indoor navigation</h3>
+              <p>Add elevator, ramp, hallway, washroom, and floor-by-floor route guidance after the outdoor entrance layer is reliable.</p>
+            </article>
+            <article class="roadmap-card">
+              <span>02</span>
+              <h3>Live entrance status</h3>
+              <p>Flag construction, locked doors, weather issues, blocked ramps, and other temporary barriers that can change a route.</p>
+            </article>
+            <article class="roadmap-card">
+              <span>03</span>
+              <h3>Richer accessibility metadata</h3>
+              <p>Track door type, slope, curb cuts, surface quality, nearby parking, lighting, and confidence level for each entrance.</p>
+            </article>
+          </div>
+        </section>
+      </main>
+    </div>
 
     <script>
-      // Shrink navbar when page is scrolled; revert on hover
       const navbar = document.getElementById('navbar');
       function updateNavbar() {
         if (window.scrollY > 10) navbar.classList.add('navbar--shrink');

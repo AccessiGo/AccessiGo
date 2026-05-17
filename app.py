@@ -17,13 +17,18 @@ def allowed_file(filename):
 
 @app.route("/")
 def index():
+    if has_react_build():
+        return send_from_directory(REACT_BUILD_DIR, "index.html")
     return render_template("index.html")
 
-@app.route("/upload-page", methods=["GET"])
+@app.route("/upload", methods=["GET"])
 def upload_page():
-    return render_template("upload.html")  # file is templates/upload.html
+    if has_react_build():
+        return send_from_directory(REACT_BUILD_DIR, "index.html")
+    return render_template("upload.html")
 
 @app.route("/upload", methods=["POST"])
+@app.route("/api/upload", methods=["POST"])
 def upload_file():
     if "file" not in request.files: return jsonify({"error": "No file part"}), 400
     f = request.files["file"]
@@ -46,7 +51,6 @@ def upload_file():
 def has_react_build():
     return REACT_BUILD_DIR.exists() and (REACT_BUILD_DIR / "index.html").exists()
 
-@app.route("/", defaults={"path": ""})
 @app.route("/<path:path>")
 def serve_frontend(path: str):
     if has_react_build():

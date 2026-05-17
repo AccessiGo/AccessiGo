@@ -1,160 +1,201 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Upload Image — AccessiGo</title>
-  <link rel="icon" type="image/png" href="{{ url_for('static', filename='img/logo.png') }}">
-  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-</head>
-<body>
-  <nav class="navbar glass" id="navbar">
-    <div class="navbar__left">
-      <a class="logo" href="{{ url_for('index') }}">
-        <img class="logo__img-square"
-             src="{{ url_for('static', filename='img/logo.png') }}"
-             alt="AccessiGo logo" />
-        <span class="logo__text">AccessiGo</span>
-      </a>
-    </div>
-    <div class="navbar__right">
-      <a class="btn" href="{{ url_for('index') }}">Home</a>
-    </div>
-  </nav>
-
-  <main class="container one-col">
-    <section class="card">
-      <h1>Upload an Entrance Photo</h1>
-      <p class="muted">Supported formats: PNG, JPG, JPEG, GIF, BMP (max 16MB)</p>
-
-      <form id="uploadForm" class="upload-form" action="{{ url_for('upload_file') }}" method="POST" enctype="multipart/form-data">
-        <label for="file" class="file-drop" id="fileDrop">
-          <input id="file" name="file" type="file" accept="image/*" hidden />
-          <span>Drag &amp; drop image here or click to browse</span>
-        </label>
-        <button class="btn btn--primary" id="submitButton" type="submit">Upload</button>
-      </form>
-
-      <div id="preview" class="preview hidden">
-        <img id="previewImg" alt="Preview" />
-      </div>
-
-      <div id="result" class="result hidden" role="status" aria-live="polite">
-        <div class="result__icon" id="resultIcon" aria-hidden="true">?</div>
-        <div class="result__text">
-          <h2 id="resultLabel">Result</h2>
-          <p id="resultScore">Score: —</p>
-          <p id="resultDescription" class="muted"></p>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Photo Check - AccessiGo</title>
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='img/logo.png') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  </head>
+  <body>
+    <div class="page" id="top">
+      <nav class="navbar" id="navbar">
+        <a class="logo" href="{{ url_for('index') }}" aria-label="AccessiGo home">
+          <img class="logo__img-square" src="{{ url_for('static', filename='img/logo.png') }}" alt="AccessiGo logo" />
+          <span class="logo__text">AccessiGo</span>
+        </a>
+        <div class="navbar__links" aria-label="Primary navigation">
+          <a href="#upload">Photo Check</a>
+          <a href="#map">Campus Map</a>
         </div>
-        <button class="btn" id="resetButton" type="button">Upload another image</button>
-      </div>
-    </section>
-  </main>
+        <a class="btn btn--primary navbar__cta" href="{{ url_for('index') }}">Home</a>
+      </nav>
 
-  <script>
-    // Navbar shrink on scroll
-    const navbar = document.getElementById('navbar');
-    function updateNavbar() {
-      if (window.scrollY > 10) navbar.classList.add('navbar--shrink');
-      else navbar.classList.remove('navbar--shrink');
-    }
-    window.addEventListener('scroll', updateNavbar, { passive: true });
-    document.addEventListener('DOMContentLoaded', updateNavbar);
+      <main class="upload-page">
+        <section class="upload-card" id="upload">
+          <div class="section-copy">
+            <span class="section-label">Photo check</span>
+            <h1>Check an entrance photo in seconds.</h1>
+            <p>
+              Upload a campus entrance image and AccessiGo returns a quick accessibility signal. Green
+              means the entrance appears accessible, yellow means review details, and red means the
+              route may include barriers.
+            </p>
+          </div>
 
-    // Upload logic
-    const fileInput = document.getElementById('file');
-    const fileDrop = document.getElementById('fileDrop');
-    const form = document.getElementById('uploadForm');
-    const preview = document.getElementById('preview');
-    const previewImg = document.getElementById('previewImg');
-    const result = document.getElementById('result');
-    const resultIcon = document.getElementById('resultIcon');
-    const resultLabel = document.getElementById('resultLabel');
-    const resultScore = document.getElementById('resultScore');
-    const resultDescription = document.getElementById('resultDescription');
-    const resetButton = document.getElementById('resetButton');
+          <form id="uploadForm" class="upload-panel" action="{{ url_for('upload_file') }}" method="POST" enctype="multipart/form-data">
+            <label for="file" class="file-drop" id="fileDrop">
+              <input id="file" name="file" type="file" accept="image/*" hidden />
+              <strong>Drop an entrance photo here</strong>
+              <span>PNG, JPG, JPEG, GIF, or BMP up to 16MB</span>
+            </label>
 
-    fileDrop.addEventListener('click', () => fileInput.click());
-    fileDrop.addEventListener('dragover', (e) => { e.preventDefault(); fileDrop.classList.add('file-drop--active'); });
-    fileDrop.addEventListener('dragleave', () => fileDrop.classList.remove('file-drop--active'));
-    fileDrop.addEventListener('drop', (e) => {
-      e.preventDefault();
-      fileDrop.classList.remove('file-drop--active');
-      const files = e.dataTransfer.files;
-      if (files && files[0]) { fileInput.files = files; showPreview(files[0]); }
-    });
-    fileInput.addEventListener('change', () => {
-      if (fileInput.files && fileInput.files[0]) showPreview(fileInput.files[0]);
-    });
+            <div class="upload-actions">
+              <button class="btn btn--primary" id="submitButton" type="submit">Analyze Photo</button>
+              <button class="btn btn--secondary hidden" id="resetButton" type="button">Clear</button>
+            </div>
 
-    function showPreview(file) {
-      preview.classList.remove('hidden');
-      const reader = new FileReader();
-      reader.onload = (e) => (previewImg.src = e.target.result);
-      reader.readAsDataURL(file);
-      previewImg.classList.remove('border--green','border--yellow','border--red');
-      result.classList.remove('result--green','result--yellow','result--red');
-    }
+            <div id="preview" class="preview hidden">
+              <img id="previewImg" alt="Preview" />
+            </div>
 
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const formData = new FormData(form);
-      const res = await fetch(form.action, { method: 'POST', body: formData });
-      const data = await res.json();
+            <div id="result" class="result hidden" role="status" aria-live="polite">
+              <div class="result__icon" id="resultIcon" aria-hidden="true">!</div>
+              <div class="result__text">
+                <h2 class="result__title" id="resultLabel">Accessibility signal</h2>
+                <p class="result__score" id="resultScore">Score: -</p>
+                <p class="result__description" id="resultDescription"></p>
+              </div>
+            </div>
+          </form>
+        </section>
 
-      if (data.error) {
-        resultLabel.textContent = 'Error';
-        resultScore.textContent = data.error;
-        resultIcon.textContent = '⚠';
-        resultDescription.textContent = '';
-        result.classList.remove('hidden');
-        return;
+        <section class="map-section" id="map">
+          <div class="section-copy section-copy--center">
+            <span class="section-label">Campus map</span>
+            <h2>Browse the University of Windsor accessibility layer.</h2>
+            <p>
+              Use the embedded campus map as a starting point, then pair it with entrance photos and
+              accessibility notes so routes are planned around real access needs.
+            </p>
+            <a class="btn btn--secondary" href="{{ url_for('static', filename='img/uw_campus_map.pdf') }}" target="_blank" rel="noopener noreferrer">
+              Open Campus PDF
+            </a>
+          </div>
+          <div class="map-frame-wrap">
+            <iframe
+              class="map-frame"
+              title="University of Windsor Map"
+              src="https://www.google.com/maps?q=University+of+Windsor,401+Sunset+Avenue+Windsor+ON&output=embed"
+              allowfullscreen
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script>
+      const navbar = document.getElementById('navbar');
+      function updateNavbar() {
+        if (window.scrollY > 10) navbar.classList.add('navbar--shrink');
+        else navbar.classList.remove('navbar--shrink');
+      }
+      window.addEventListener('scroll', updateNavbar, { passive: true });
+      document.addEventListener('DOMContentLoaded', updateNavbar);
+
+      const fileInput = document.getElementById('file');
+      const fileDrop = document.getElementById('fileDrop');
+      const form = document.getElementById('uploadForm');
+      const preview = document.getElementById('preview');
+      const previewImg = document.getElementById('previewImg');
+      const result = document.getElementById('result');
+      const resultIcon = document.getElementById('resultIcon');
+      const resultLabel = document.getElementById('resultLabel');
+      const resultScore = document.getElementById('resultScore');
+      const resultDescription = document.getElementById('resultDescription');
+      const resetButton = document.getElementById('resetButton');
+      const submitButton = document.getElementById('submitButton');
+
+      function resetResult() {
+        result.classList.add('hidden');
+        result.classList.remove('result--green', 'result--yellow', 'result--red');
+        previewImg.classList.remove('border--green', 'border--yellow', 'border--red');
       }
 
-      const score = typeof data.score === 'number' ? data.score : 0;
-      resultScore.textContent = 'Score: ' + score.toFixed(2);
-
-      function setTint(which) {
-        result.classList.remove('result--green','result--yellow','result--red');
-        result.classList.add('result--' + which);
-      }
-      function setBorder(which) {
-        previewImg.classList.remove('border--green','border--yellow','border--red');
-        previewImg.classList.add('border--' + which);
+      function showPreview(file) {
+        preview.classList.remove('hidden');
+        resetButton.classList.remove('hidden');
+        const reader = new FileReader();
+        reader.onload = (event) => (previewImg.src = event.target.result);
+        reader.readAsDataURL(file);
+        resetResult();
       }
 
-      if (score <= 0.4) {
-        resultLabel.textContent = 'Accessible (green)';
-        resultDescription.textContent = '(green) perfectly accessible';
-        resultIcon.textContent = '✓';
-        setBorder('green');
-        setTint('green');
-      } else if (score < 0.6) {
-        resultLabel.textContent = 'Somewhat Accessible (yellow)';
-        resultDescription.textContent = '(yellow) somewhat accessible';
-        resultIcon.textContent = '✓';
-        setBorder('yellow');
-        setTint('yellow');
-      } else {
-        resultLabel.textContent = 'Inaccessible (red)';
-        resultDescription.textContent = '(red) HORRIBLE for disabled people';
-        resultIcon.textContent = '✗';
-        setBorder('green');   // as requested
-        setTint('red');       // frosted red result card
-      }
+      fileDrop.addEventListener('click', () => fileInput.click());
+      fileDrop.addEventListener('dragover', (event) => event.preventDefault());
+      fileDrop.addEventListener('drop', (event) => {
+        event.preventDefault();
+        const files = event.dataTransfer.files;
+        if (files && files[0]) {
+          fileInput.files = files;
+          showPreview(files[0]);
+        }
+      });
+      fileInput.addEventListener('change', () => {
+        if (fileInput.files && fileInput.files[0]) showPreview(fileInput.files[0]);
+      });
 
-      result.classList.remove('hidden');
-      preview.classList.add('preview--show');
-    });
+      form.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        if (!fileInput.files || !fileInput.files[0]) return;
 
-    resetButton.addEventListener('click', () => {
-      form.reset();
-      preview.classList.add('hidden');
-      preview.classList.remove('preview--show');
-      result.classList.add('hidden');
-      previewImg.classList.remove('border--green','border--yellow','border--red');
-      result.classList.remove('result--green','result--yellow','result--red');
-    });
-  </script>
-</body>
+        submitButton.textContent = 'Analyzing...';
+        submitButton.disabled = true;
+
+        try {
+          const formData = new FormData(form);
+          const response = await fetch(form.action, { method: 'POST', body: formData });
+          const data = await response.json();
+
+          if (!response.ok || data.error) {
+            resultLabel.textContent = 'Upload issue';
+            resultScore.textContent = data.error || 'Upload failed';
+            resultDescription.textContent = '';
+            resultIcon.textContent = '!';
+            result.classList.remove('hidden');
+            return;
+          }
+
+          const score = typeof data.score === 'number' ? data.score : 0;
+          resultScore.textContent = 'Score: ' + score.toFixed(2);
+          result.classList.remove('result--green', 'result--yellow', 'result--red');
+          previewImg.classList.remove('border--green', 'border--yellow', 'border--red');
+
+          if (score <= 0.4) {
+            result.classList.add('result--green');
+            previewImg.classList.add('border--green');
+            resultIcon.textContent = 'OK';
+            resultLabel.textContent = 'Accessibility signal';
+            resultDescription.textContent = 'Looks accessible. The entrance appears to have a clear, barrier-free approach.';
+          } else if (score < 0.6) {
+            result.classList.add('result--yellow');
+            previewImg.classList.add('border--yellow');
+            resultIcon.textContent = '!';
+            resultLabel.textContent = 'Accessibility signal';
+            resultDescription.textContent = 'Review with caution. Check slope, curb cuts, nearby ramps, and door clearance before relying on this route.';
+          } else {
+            result.classList.add('result--red');
+            previewImg.classList.add('border--red');
+            resultIcon.textContent = 'X';
+            resultLabel.textContent = 'Accessibility signal';
+            resultDescription.textContent = 'Likely inaccessible. The photo may show barriers that make wheelchair access difficult.';
+          }
+
+          result.classList.remove('hidden');
+        } finally {
+          submitButton.textContent = 'Analyze Photo';
+          submitButton.disabled = false;
+        }
+      });
+
+      resetButton.addEventListener('click', () => {
+        form.reset();
+        preview.classList.add('hidden');
+        resetButton.classList.add('hidden');
+        resetResult();
+      });
+    </script>
+  </body>
 </html>

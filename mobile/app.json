@@ -1,0 +1,40 @@
+{
+  "expo": {
+    "name": "AccessiGo",
+    "slug": "accessigo",
+    "version": "0.1.0",
+    "orientation": "portrait",
+    "platforms": [
+      "ios",
+      "android",
+      "web"
+    ],
+    "icon": "./assets/logo.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./assets/logo.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#fbfbff"
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true,
+      "infoPlist": {
+        "NSCameraUsageDescription": "AccessiGo uses your camera to check campus entrance photos for accessibility.",
+        "NSPhotoLibraryUsageDescription": "AccessiGo lets you choose entrance photos from your library for accessibility checks."
+      }
+    },
+    "android": {
+      "permissions": [
+        "CAMERA",
+        "READ_MEDIA_IMAGES"
+      ],
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/logo.png",
+        "backgroundColor": "#fbfbff"
+      }
+    }
+  }
+}
