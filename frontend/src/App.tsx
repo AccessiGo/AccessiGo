@@ -258,7 +258,7 @@ const UploadCard: React.FC = () => {
     <section className="upload-card" id="upload">
       <div className="section-copy">
         <span className="section-label">Photo check</span>
-        <h2>Check an entrance photo in seconds.</h2>
+        <h2>Check an entrance photo in seconds</h2>
         <p>
           Upload a campus entrance image and AccessiGo returns a quick accessibility signal. Use it
           as an early warning before adding details to the map or choosing a route.
@@ -389,7 +389,7 @@ const MapSection: React.FC = () => (
   <section className="map-section" id="map">
     <div className="section-copy section-copy--center">
       <span className="section-label">Campus map</span>
-      <h2>Browse the University of Windsor accessibility layer.</h2>
+      <h2>Browse the University of Windsor accessibility layer</h2>
       <p>
         Use the embedded campus map as a starting point, then pair it with entrance photos and
         accessibility notes so routes are planned around real access needs.

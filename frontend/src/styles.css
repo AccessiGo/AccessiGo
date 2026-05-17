@@ -812,6 +812,12 @@ img {
   margin-right: auto;
 }
 
+.map-section .section-copy--center h1,
+.map-section .section-copy--center h2 {
+  font-size: clamp(2.65rem, 4vw, 3.95rem);
+  line-height: 1.06;
+}
+
 .map-frame-wrap {
   overflow: hidden;
   height: 520px;
@@ -829,7 +835,8 @@ img {
 }
 
 .upload-card {
-  align-items: start;
+  grid-template-columns: minmax(0, 0.92fr) minmax(480px, 1.08fr);
+  align-items: stretch;
 }
 
 .upload-page .upload-card {
@@ -843,8 +850,10 @@ img {
 .upload-panel {
   display: grid;
   gap: 16px;
+  align-content: center;
   min-width: 0;
   max-width: 100%;
+  min-height: 100%;
   padding: 26px;
   border: 1px solid var(--border);
   border-radius: 18px;
@@ -852,12 +861,33 @@ img {
   box-shadow: var(--shadow);
 }
 
+.upload-card .section-copy {
+  text-align: center;
+}
+
+.upload-card .section-label {
+  margin-bottom: 24px;
+  font-size: 1.7rem;
+}
+
+.upload-card .section-copy h1,
+.upload-card .section-copy h2 {
+  font-size: clamp(2.85rem, 3.6vw, 3.85rem);
+  line-height: 1.08;
+}
+
+.upload-card .section-copy p {
+  max-width: 680px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .file-drop {
   display: grid;
   place-items: center;
   gap: 6px;
   min-width: 0;
-  min-height: 184px;
+  min-height: 260px;
   padding: 28px;
   border: 2px dashed #d2d7e4;
   border-radius: 12px;
@@ -876,11 +906,11 @@ img {
 
 .file-drop strong {
   color: #151b2b;
-  font-size: 1.1rem;
+  font-size: 1.32rem;
 }
 
 .file-drop span {
-  font-size: 0.94rem;
+  font-size: 1.05rem;
   font-weight: 650;
   overflow-wrap: anywhere;
 }
@@ -888,7 +918,12 @@ img {
 .upload-actions {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   gap: 10px;
+}
+
+.upload-actions .btn {
+  min-width: 250px;
 }
 
 .preview {
@@ -1148,6 +1183,13 @@ img {
     grid-template-columns: 1fr;
   }
 
+  .upload-card .section-copy h1,
+  .upload-card .section-copy h2,
+  .map-section .section-copy--center h1,
+  .map-section .section-copy--center h2 {
+    font-size: 3rem;
+  }
+
   .roadmap-grid {
     grid-template-columns: 1fr;
   }
@@ -1272,6 +1314,13 @@ img {
   .section-copy h1,
   .section-copy h2 {
     font-size: 2.2rem;
+  }
+
+  .upload-card .section-copy h1,
+  .upload-card .section-copy h2,
+  .map-section .section-copy--center h1,
+  .map-section .section-copy--center h2 {
+    font-size: 2.05rem;
   }
 
   .section-copy p {
